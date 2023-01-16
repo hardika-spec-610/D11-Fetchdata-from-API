@@ -67,7 +67,7 @@
       };
       const dataList = [];
       fetch(
-        "https://deezerdevs-deezer.p.rapidapi.com/search?q=pinkfloyd",
+        "https://striveschool-api.herokuapp.com/api/deezer/search?q=pinkfloyd",
         options
       )
         .then((response) => response.json())
@@ -99,7 +99,7 @@
         .catch((err) => console.error(err));
 
       fetch(
-        "https://striveschool-api.herokuapp.com/api/deezer/search?q=[daftpunk]",
+        "https://striveschool-api.herokuapp.com/api/deezer/search?q=daftpunk",
         options
       )
         .then((response) => response.json())
@@ -130,7 +130,7 @@
         .catch((err) => console.error(err));
 
       fetch(
-        "https://striveschool-api.herokuapp.com/api/deezer/search?q=[metallica]",
+        "https://striveschool-api.herokuapp.com/api/deezer/search?q=metallica",
         options
       )
         .then((response) => response.json())

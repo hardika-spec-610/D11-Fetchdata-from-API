@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generate list</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <!-- <link rel="stylesheet" href="./styles.css" /> -->
+    <style>
+      .bg-light {
+        background-color: bisque;
+      }
+      .container h2 + .row {
+        margin-top: 20px;
+      }
+      .bg-aquamarine {
+        background-color: aquamarine;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="container py-5">
+        <h1>Music Album</h1>
+        <div class="row"></div>
+      </div>
+    </section>
+    <section class="bg-light">
+      <div class="container pt-3">
+        <h2>Music List1</h2>
+        <div class="row"></div>
+      </div>
+    </section>
+    <section class="bg-aquamarine">
+      <div class="container py-3">
+        <h2>Metallica Music List</h2>
+        <div class="row third-row"></div>
+      </div>
+    </section>
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const options = {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Key":
+            "17885d541bmsh28101685e13b5fap15dc1ejsn0bddab4514f9",
+          "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+        },
+      };
+      const musicAlbums1 = () => {
+        fetch(
+          "https://deezerdevs-deezer.p.rapidapi.com/search?q=pinkfloyd",
+          options
+        )
+          .then((response) => response.json())
+          .then((musicList) => {
+            // console.log("list", musicList);
+            const dataList = musicList.data;
+            console.log("datalist", musicList.data);
+            let column = document.querySelector(".row");
+            // console.log("column", column);
+            for (let i = 0; i < dataList.length; i++) {
+              const music = dataList[i];
+              //   console.log("music", music);
+              let colCreate = document.createElement("div");
+              colCreate.className =
+                "d-flex col-12 col-sm-6 col-md-4 col-lg-3 mb-4";
+              colCreate.innerHTML = `
+             
+                    <div class="card w-100">
+                        <img src=${music.album.cover} class="card-img-top" alt=${music.title_short}>
+                        <div class="card-body">
+                            <h5 class="card-title">${music.album.title}</h5>
+                        </div>
+                </div>
+                `;
+              column.appendChild(colCreate);
+            }
+          })
+          .catch((err) => console.error(err));
+      };
+      musicAlbums1();
+
+      fetch(
+        "https://striveschool-api.herokuapp.com/api/deezer/search?q=[daftpunk]",
+        options
+      )
+        .then((response) => response.json())
+        .then((musicList1) => {
+          //   console.log("musicList1", musicList1);
+          const dataList2 = musicList1.data;
+          console.log("datalist2", dataList2);
+          let secondRow = document.querySelector(".container h2 + .row");
+          //   console.log("secondRow", secondRow);
+          for (let i = 0; i < dataList2.length; i++) {
+            const music2 = dataList2[i];
+            let colCreate = document.createElement("div");
+            colCreate.className =
+              "d-flex col-12 col-sm-6 col-md-4 col-lg-3 mb-4";
+            colCreate.innerHTML = `
+             
+                    <div class="card w-100">
+                        <img src=${music2.album.cover} class="card-img-top" alt=${music2.title_short}>
+                        <div class="card-body">
+                            <h5 class="card-title">${music2.album.title}</h5>
+                        </div>
+                </div>
+                `;
+            secondRow.appendChild(colCreate);
+          }
+        })
+        .catch((err) => console.error(err));
+
+      fetch(
+        "https://striveschool-api.herokuapp.com/api/deezer/search?q=[metallica]",
+        options
+      )
+        .then((response) => response.json())
+        .then((musicList2) => {
+          //   console.log("musicList2", musicList2);
+          const dataList3 = musicList2.data;
+          console.log("datalist3", dataList3);
+          let thirdRow = document.getElementsByClassName("third-row")[0];
+          //   console.log("thirdRow", thirdRow);
+          for (let i = 0; i < dataList3.length; i++) {
+            const music3 = dataList3[i];
+            let colCreate = document.createElement("div");
+            colCreate.className =
+              "d-flex col-12 col-sm-6 col-md-4 col-lg-3 mb-4";
+            colCreate.innerHTML = `
+
+                    <div class="card w-100">
+                        <img src=${music3.album.cover} class="card-img-top" alt=${music3.title_short}>
+                        <div class="card-body">
+                            <h5 class="card-title">${music3.album.title}</h5>
+                        </div>
+                </div>
+                `;
+            thirdRow.appendChild(colCreate);
+          }
+        })
+        .catch((err) => console.error(err));
+    </script>
+  </body>
+</html>
